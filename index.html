@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kuis Sifat Bilangan Berpangkat</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-sky-100 to-blue-200 min-h-screen flex flex-col items-center py-10 px-4">
+  <div class="bg-white rounded-2xl shadow-lg p-6 w-full max-w-3xl">
+    <h1 class="text-3xl font-bold text-center text-blue-800 mb-6">Kuis Sifat Bilangan Berpangkat</h1>
+    <form id="quizForm" class="space-y-6"></form>
+    <div class="text-center mt-6">
+      <button onclick="submitQuiz()" type="button" class="bg-blue-700 text-white px-6 py-2 rounded-lg hover:bg-blue-800">Submit</button>
+      <button onclick="location.reload()" type="button" class="ml-4 text-blue-600 underline">Reset</button>
+      <p id="score" class="text-xl font-semibold text-blue-700 mt-4"></p>
+    </div>
+  </div>
+
+  <script>
+    const soal = [
+      { pertanyaan: "Sederhanakan: 2³ × 2²", pilihan: ["2⁵", "2⁶", "2¹", "4⁵"], jawaban: "2⁵" },
+      { pertanyaan: "Sederhanakan: 5⁴ ÷ 5²", pilihan: ["5⁶", "5²", "5³", "5¹"], jawaban: "5²" },
+      { pertanyaan: "(3²)³ = ...", pilihan: ["3⁵", "3⁶", "3⁹", "3³"], jawaban: "3⁶" },
+      { pertanyaan: "Sederhanakan: (2×3)²", pilihan: ["5²", "6²", "2²×3²", "6³"], jawaban: "2²×3²" },
+      { pertanyaan: "Sederhanakan: (a²)³", pilihan: ["a⁵", "a⁶", "a⁹", "a⁴"], jawaban: "a⁶" },
+      { pertanyaan: "Sederhanakan: x⁷ ÷ x³", pilihan: ["x¹⁰", "x⁴", "x³", "x²"], jawaban: "x⁴" },
+      { pertanyaan: "Sederhanakan: (4²)³", pilihan: ["4⁶", "4⁵", "4⁷", "4⁸"], jawaban: "4⁶" },
+      { pertanyaan: "Sederhanakan: y⁵ × y²", pilihan: ["y⁷", "y¹⁰", "y³", "y²"], jawaban: "y⁷" },
+      { pertanyaan: "Sederhanakan: (a×b)³", pilihan: ["a³+b³", "a³×b³", "ab³", "(a+b)³"], jawaban: "a³×b³" },
+      { pertanyaan: "Sederhanakan: (x³)² ÷ x²", pilihan: ["x³", "x⁴", "x⁵", "x⁶"], jawaban: "x⁴" }
+    ];
+
+    function acakArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    const soalTerpilih = acakArray([...soal]).slice(0, 10);
+    const form = document.getElementById("quizForm");
+
+    soalTerpilih.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.className = "bg-blue-50 p-4 rounded-xl shadow";
+
+      const question = document.createElement("p");
+      question.className = "font-semibold mb-2";
+      question.innerText = `${index + 1}. ${item.pertanyaan}`;
+      div.appendChild(question);
+
+      item.pilihan.forEach(pil => {
+        const label = document.createElement("label");
+        label.className = "block cursor-pointer mb-1";
+
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = `soal${index}`;
+        input.value = pil;
+        input.className = "mr-2";
+
+        label.appendChild(input);
+        label.appendChild(document.createTextNode(pil));
+        div.appendChild(label);
+      });
+
+      form.appendChild(div);
+    });
+
+    function submitQuiz() {
+      let skor = 0;
+      soalTerpilih.forEach((item, index) => {
+        const pilihan = document.querySelector(`input[name="soal${index}"]:checked`);
+        if (pilihan && pilihan.value === item.jawaban) {
+          skor++;
+          pilihan.parentElement.classList.add("text-green-700", "font-bold");
+        } else if (pilihan) {
+          pilihan.parentElement.classList.add("text-red-600", "line-through");
+        }
+      });
+
+      document.getElementById("score").innerText = `Kamu menjawab benar ${skor} dari 10 soal`;
+    }
+  </script>
+</body>
+</html>
