@@ -1,1 +1,1 @@
-# kuis-2
+# kuis-bilangan-berpangkat
