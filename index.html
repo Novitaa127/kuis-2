@@ -42,8 +42,8 @@
       { pertanyaan: "(a²b³)² = ...", pilihan: ["a²b⁶", "a⁴b⁶", "a⁴b³", "a³b⁵"], jawaban: "a⁴b⁶" },
       { pertanyaan: "(x²y³)³ = ...", pilihan: ["x⁶y⁹", "x⁵y⁶", "x⁶y⁶", "x³y³"], jawaban: "x⁶y⁹" },
       { pertanyaan: "(2³ × 2²) ÷ 2³ = ...", pilihan: ["2²", "2⁵", "2", "2⁴"], jawaban: "2²" },
-      { pertanyaan: "x² × x × x³ = ...", pilihan: ["x⁵", "x⁶", "x⁴", "x³"], jawaban: "x⁶" },
-      { pertanyaan: "3² × 4² = ...", pilihan: ["7²", "12²", "3×4²", "3²×4²"], jawaban: "3²×4²" }
+      { pertanyaan: "a² × a × a³ = ...", pilihan: ["a⁵", "a⁶", "a⁴", "a³"], jawaban: "a⁶" },
+      { pertanyaan: "3² × 4² = ...", pilihan: ["7²", "12²", "3 × 4²", "3² × 4²"], jawaban: "3² × 4²" }
     ];
 
     function acakArray(arr) {
@@ -96,10 +96,10 @@
         const feedback = document.getElementById(`feedback${index}`);
         if (pilihan && pilihan.value === item.jawaban) {
           skor++;
-          feedback.textContent = `✅ Benar: ${item.jawaban}`;
+          feedback.textContent = `Benar: ${item.jawaban}`;
           feedback.classList.add("text-green-700");
         } else {
-          feedback.textContent = `❌ Salah. Jawaban benar: ${item.jawaban}`;
+          feedback.textContent = `Salah. Jawaban benar: ${item.jawaban}`;
           feedback.classList.add("text-red-600");
         }
       });
