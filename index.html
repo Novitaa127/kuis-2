@@ -11,8 +11,8 @@
     <h1 class="text-3xl font-bold text-center text-violet-800 mb-6">Kuis Bilangan Berpangkat</h1>
     <form id="quizForm" class="space-y-5"></form>
     <div class="text-center mt-6">
-      <button onclick="submitQuiz()" type="button" class="bg-violet-700 hover:bg-violet-800 text-white px-6 py-2 rounded-full font-semibold shadow">✔️ Submit</button>
-      <button onclick="location.reload()" type="button" class="ml-4 text-violet-600 underline">🔄 Reset</button>
+      <button onclick="submitQuiz()" type="button" class="bg-violet-700 hover:bg-violet-800 text-white px-6 py-2 rounded-full font-semibold shadow">Submit</button>
+      <button onclick="location.reload()" type="button" class="ml-4 text-violet-600 underline">Reset</button>
       <p id="score" class="text-xl font-semibold text-violet-700 mt-4"></p>
     </div>
   </div>
@@ -104,7 +104,8 @@
         }
       });
 
-      document.getElementById("score").innerText = `Kamu menjawab benar ${skor} dari ${soalTerpilih.length} soal.`;
+      const nilai = Math.round((skor / soalTerpilih.length) * 100);
+      document.getElementById("score").innerText = `Kamu menjawab benar ${skor} dari ${soalTerpilih.length} soal. Nilai kamu: ${nilai}`;
     }
   </script>
 </body>
